@@ -1,0 +1,162 @@
+Car Name: 2016 Nissan Titan Warrior Concept
+B699
+AWD
+6.7L V8T Diesel
+Pickups and 4x4s
+
+---Output Structure---
+[Letter][Number]
+S - Signed Integer
+U - Unsigned Integer
+F - Floating Point
+Number - Number of bits used
+
+Max Packet Size = 323.
+Max Byte Number = 127
+Min Byte Number = -128
+
+Sled - Motion Sleds
+Dash - Contains Sled data as well as extra points
+
+// = 1 when race is on. = 0 when in menus/race stopped …
+    S32 isRaceOn = 1, 0, 0, 0,
+
+//Can overflow to 0 eventually.
+    U32 TimestampMs = -124, -1, -33, 1,
+    F32 EngineMaxRpm  = -6, 127, -94, 69,
+    F32 EngineIdleRpm = 35, 98, 124, 68,
+    F32 CurrentEngineRpm = -79, 98, 124, 68,
+
+//In the car's local space; X = right, Y = up, Z = forward
+    F32 AccelerationX = -78, 77, 54, 57,
+    F32 AccelerationY = 47, -3, 75, -68,
+    F32 AccelerationZ = 71, 20, 41, 57,
+
+    F32 VelocityX =  -107, -6, 60, -71,
+    F32 VelocityY = -24, -43, -73, -72,
+    F32 VelocityZ = -14, -80, 100, 57,
+
+//In the car's local space; X = pitch, Y = yaw, Z = roll
+    F32 AngularVelocityX = -50, -109, -113, 57,
+    F32 AngularVelocityY = 81, -28, -101, 54,
+    F32 AngularVelocityZ =  65, -85, 92, 57,
+
+    F32 Yaw = 93, 65, 24, 64,
+    F32 Pitch = -94, 84, 85, 60,
+    F32 Roll = 51, 107, 101, -68,
+
+// Suspension travel normalized: 0.0f = max stretch; 1.0 = max compression
+    F32 NormalizedSuspensionTravelFrontLeft = 119, -116, -6, 62,
+    F32 NormalizedSuspensionTravelFrontRight = -122, -33, -7, 62,
+    F32 NormalizedSuspensionTravelRearLeft = 68, -83, -35, 62,
+    F32 NormalizedSuspensionTravelRearRight = 3, -84, -29, 62,
+
+// Tire normalized slip ratio, = 0 means 100% grip and |ratio| > 1.0 means loss of grip.
+    F32 TireSlipRatioFrontLeft = 62, -46, -102, -70,
+    F32 TireSlipRatioFrontRight = 90, -7, 13, 62,
+    F32 TireSlipRatioRearLeft = -70, 69, 31, -66,
+    F32 TireSlipRatioRearRight = -24, -23, 95, 61,
+
+// Wheels rotation speed radians/sec.
+    F32 WheelRotationSpeedFrontLeft = 0, 0, 0, 0,
+    F32 WheelRotationSpeedFrontRight = 0, 0, 0, 0,
+    F32 WheelRotationSpeedRearLeft = 0, 0, 0, 0,
+    F32 WheelRotationSpeedRearRight =  0, 0, 0, 0,
+
+// = 1 when wheel is on rumble strip, = 0 when off.
+    S32 WheelOnRumbleStripFrontLeft = 0, 0, 0, 0,
+    S32 WheelOnRumbleStripFrontRight = 0, 0, 0, 0,
+    S32 WheelOnRumbleStripRearLeft = 0, 0, 0, 0,
+    S32 heelOnRumbleStripRearRight = 0, 0, 0, 0,
+
+// = from 0 to 1, where 1 is the deepest puddle
+    F32 WheelInPuddleDepthFrontLeft = 0, 0, 0, 0,
+    F32 WheelInPuddleDepthFrontRight = 0, 0, 0, 0,
+    F32 WheelInPuddleDepthRearLeft =  0, 0, 0, 0,
+    F32 WheelInPuddleDepthRearRight = 0, 0, 0, 0,
+
+// Non-dimensional surface rumble values passed to controller force feedback
+    F32 SurfaceRumbleFrontLeft =  0, 0, 0, 0,
+    F32 SurfaceRumbleFrontRight =  0, 0, 0, 0,
+    F32 SurfaceRumbleRearLeft = 0, 0, 0, 0,
+    F32 SurfaceRumbleRearRight = 0, 0, 0, 0,
+
+// Tire normalized slip angle, = 0 means 100% grip and |angle| > 1.0 means loss of grip.
+    F32 TireSlipAngleFrontLeft = 32, -59, -79, -66,
+    F32 TireSlipAngleFrontRight = 6, -39, 32, 63,
+    F32 TireSlipAngleRearLeft = 47, -59, -13, -68,
+    F32 TireSlipAngleRearRight = -45, 97, 8, -67,
+
+// Tire normalized combined slip, = 0 means 100% grip and |slip| > 1.0 means loss of grip.
+    F32 TireCombinedSlipFrontLeft = 99, -59, -79, 62,
+    F32 TireCombinedSlipFrontRight = -95, -73, 36, 63,
+    F32 TireCombinedSlipRearLeft = 54, 41, 34, 62,
+    F32 TireCombinedSlipRearRight = -47, 22, -125, 61,
+
+// Actual suspension travel in meters
+    F32 SuspensionTravelMetersFrontLeft = 80, -128, -19, 60,
+    F32 SuspensionTravelMetersFrontRight = -32, 65, -21, 60,
+    F32 SuspensionTravelMetersRearLeft = 0, 5, -107, -70,
+    F32 SuspensionTravelMetersRearRight = 0, 115, -37, 58,
+
+// Unique ID of the car make/model
+    S32 CarOrdinal = 102, 10, 0, 0,
+
+// Between 0 (D -- worst cars) and 7 (X class -- best cars) inclusive
+    S32 CarClass = 2, 0, 0, 0,
+
+// Between 100 (worst car) and 999 (best car) inclusive
+    S32 CarPerformanceIndex =  -69, 2, 0, 0,
+
+// 0 = FWD, 1 = RWD, 2 = AWD
+    S32 DrivetrainType = 2, 0, 0, 0,
+
+// Number of cylinders in the engine
+    S32 NumCylinders = 8, 0, 0, 0,
+    S32 carType = 48, 0, 0, 0,
+
+    U32 objectHit = 0, 0, 0, 0,
+    S32 carOrdinal = 0, 0, 0, 0,
+
+    F32 PositionX = 32, 108, -82, 69,
+    F32 PositionY = -111, -101, -49, 66,
+    F32 PositionZ =  -47, -71, 48, 68,
+
+    F32 Speed = -110, 74, -101, 57,
+    F32 Power = 14, -112, 36, -66,
+    F32 Torque = -44, 62, -57, -70,
+
+    F32 TireTempFrontLeft = 88, 20, 32, 67,
+    F32 TireTempFrontRight = -48, 47, 44, 67,
+    F32 TireTempRearLeft =  -95, -29, 38, 67,
+    F32 TireTempRearRight =  -95, -29, 38, 67,
+
+    F32 Boost = 99, 102, 48, -63,
+    F32 Fuel = 0, 0, -128, 63,
+    F32 DistanceTraveled = 0, 0, 0, 0,
+
+    F32 BestLap = 0, 0, 0, 0,
+    F32 LastLap = 0, 0, 0, 0,
+    F32 CurrentLap = 0, 0, 0, 0,
+
+    F32 CurrentRaceTime = -74,91,-95, 67,
+
+    U16 LapNumber = 0, 0,
+
+    U8 RacePosition = 0,
+
+    U8 Accel = 0,
+    U8 Brake = 0,
+    U8 Clutch = 0,
+    U8 HandBrake = 0,
+
+    U8 Gear = 2,
+    S8 Steer = 0,
+
+    S8 NormalizedDrivingLine = 0,
+    S8 NormalizedAIBrakeDifference = 0,
+
+
+
+
+
