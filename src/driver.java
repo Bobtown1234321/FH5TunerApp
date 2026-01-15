@@ -7,20 +7,14 @@ import java.util.concurrent.Executors;
 public class driver {
     public static void main(String[] args) {
         //saveAPI saveAPI= new saveAPI();
+        byte[] testData = {1, 0, 0, 0, -125, 57, -53, 0, -5, 63, 28, 70, 87, 19, -116, 68, 123, 19, -116, 68, 32, -115, -92, 58, 124, 26, 26, 57, -111, 16, 50, -68, -110, -5, -69, 55, 68, 90, -90, 56, -39, -7, -127, 56, 92, -36, 27, 57, 66, 66, -113, 52, -42, 79, 107, -72, -63, -49, -21, 61, -63, 39, -22, -69, 61, -66, 59, -68, -52, 100, -28, 62, 122, -37, -28, 62, -44, 86, -41, 62, 68, -32, -41, 62, -15, 69, 113, 60, -124, 86, 72, 60, 55, 95, 11, -68, 127, 85, 47, -68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -115, 10, 118, -69, -126, -26, 108, -69, 63, -16, -81, -70, 50, 90, -57, -70, -110, -3, 120, 60, -86, -24, 80, 60, -82, 24, 13, 60, -115, 24, 49, 60, 0, -26, 60, -71, 0, -16, 92, -72, 0, -48, -77, 56, 0, 44, 113, 57, 102, 1, 0, 0, 4, 0, 0, 0, 102, 3, 0, 0, 2, 0, 0, 0, 8, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -66, 124, -80, 69, -73, 99, -45, 66, 34, 24, -25, 68, -54, 70, -40, 56, -13, -20, 28, -68, -37, 42, -85, -72, 43, -4, 48, 67, 83, 30, 49, 67, -116, 29, 38, 67, -116, 29, 38, 67, 100, 102, 48, -63, 0, 0, -128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -56, -29, 15, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        rawDataLogger logger = new rawDataLogger("Telemetry", "testCar2.telemetry");
+        logger.clearFile();
+        logger.writeToFile(testData);
+        byte[] data = logger.readBytes();
+        ForzaTelemetryApi forzaTelemetryApi = new ForzaTelemetryApi(data);
+        System.out.println(forzaTelemetryApi);
 
-        byte[] test = {102, 3, 0, 0, -122, -33, -7, 62};
-        //byte[] maxRpm = {-78, 77, 54, 57,};
-        //ByteBuffer buffer1 = ByteBuffer.wrap(maxRpm);
-        //buffer1.order(ByteOrder.LITTLE_ENDIAN);
-
-        ByteBuffer buffer = ByteBuffer.wrap(test);
-        buffer.order(ByteOrder.LITTLE_ENDIAN);
-        int index = buffer.getInt();
-        float rpm = buffer.getFloat();
-        DecimalFormat test1 = new DecimalFormat("0.00");
-
-        System.out.println(index);
-        System.out.println(test1.format(rpm));
     }
 
     protected void client(){
@@ -29,5 +23,21 @@ public class driver {
 
         ExecutorService service = Executors.newFixedThreadPool(1);
         service.submit(client);
+    }
+
+    public static void testBufferRead(){
+
+        String test = "{102, 3, 0, 0, -122, -33, -7, 62}";
+        //byte[] maxRpm = {-78, 77, 54, 57,};
+        //ByteBuffer buffer1 = ByteBuffer.wrap(maxRpm);
+        //buffer1.order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buffer = ByteBuffer.wrap(test.getBytes());
+        int index = buffer.getInt();
+        float rpm = buffer.getFloat();
+        DecimalFormat test1 = new DecimalFormat("0.00");
+
+        System.out.println(index);
+        System.out.println(rpm);
+        System.out.println(test1.format(rpm));
     }
 }

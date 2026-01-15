@@ -9,11 +9,13 @@ import java.util.Arrays;
 public class ForzaClient implements Runnable{
     //Port on which to receive telemetry data set in Forza Settings
     private final int port;
-
+    private rawDataLogger dataLogger;
     public ForzaClient(int port){
         this.port = port;
     }
-
+    public rawDataLogger getDataLogger(){
+        return dataLogger;
+    }
     @Override
     public void run() {
         try(MulticastSocket clientSocket = new MulticastSocket(port)){
@@ -21,9 +23,7 @@ public class ForzaClient implements Runnable{
             int timeout = 10000;
             byte[] buffer = new byte[maxUDPSize];
             //Saves to a cache file
-            rawDataLogger dataLogger = new rawDataLogger();
-            dataLogger.createDirectory("Telemetry");
-            dataLogger.createFile("testCar1.txt");
+            dataLogger = new rawDataLogger("Telemetry", "testCar1.txt");
             dataLogger.clearFile();
 
             clientSocket.setSoTimeout(timeout);
