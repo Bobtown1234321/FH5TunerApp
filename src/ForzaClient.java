@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.MulticastSocket;
 import java.net.SocketException;
-import java.util.Arrays;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class ForzaClient implements Runnable {
     //Port on which to receive telemetry data set in Forza Settings
@@ -26,21 +27,23 @@ public class ForzaClient implements Runnable {
             int timeout = 10000;
             byte[] buffer = new byte[maxUDPSize];
             //Saves to a cache file
-            dataLogger = new rawDataLogger("Telemetry", "testCar1.txt");
-            dataLogger.clearFile();
+            //dataLogger = new rawDataLogger("Telemetry", "testCar1.txt");
+            //dataLogger.clearFile();
 
             clientSocket.setSoTimeout(timeout);
             DatagramPacket datagramPacket = new DatagramPacket(buffer, 0, buffer.length);
+            int x = 1;
+            ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+            byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
             while (true) {
                 clientSocket.receive(datagramPacket);
-//                ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
-//                byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-                if (buffer[0] == 1) {
-                    dataLogger.writeToFile(Arrays.toString(buffer).getBytes());
-                }
+
+
+                System.out.print(byteBuffer.getInt(236) + " ");
+                System.out.println(byteBuffer.getInt(240));
             }
         } catch (SocketException e) {
-            e.printStackTrace();
+            System.out.println(e);
         } catch (IOException e) {
             System.out.println("Timeout!");
         }

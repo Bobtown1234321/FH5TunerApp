@@ -21,7 +21,8 @@ public class ForzaTelemetryApi {
     ByteBuffer buffer;
 
     int isRaceOn, carOrdinal, carClass, carPerformanceIndex, driveType, numCyclinders, carType;
-    int timeMs, objectHit; //TODO: Needs to be unsigned
+    int timeMs; //TODO: Needs to be unsigned
+    long objectHit;
     float[] engineRPM, carAccler, velocity, angularVelocity, angularPosition, normSusTravel, normSlipRatio, wheelRotSpd;
     int[] onRumbleStrip;
     float[] puddleDepth, surfaceRumble, normSlipAngle, normCombinedSlip, actSusTravel, position, tireTemp;
@@ -71,14 +72,11 @@ public class ForzaTelemetryApi {
         actSusTravel = makeFloatArray(buffer, 4);
         carOrdinal = buffer.getInt();
         carClass = buffer.getInt();
-
-        int test = buffer.getInt(220);
         carPerformanceIndex = buffer.getInt();
         driveType = buffer.getInt();
         numCyclinders = buffer.getInt();
         carType = buffer.getInt();
-        objectHit = buffer.getInt();
-
+        objectHit = buffer.getLong();
         position = makeFloatArray(buffer, 3);
         speed = buffer.getFloat();
         power = buffer.getFloat();
@@ -103,7 +101,7 @@ public class ForzaTelemetryApi {
         normDriveLine = buffer.get();
         normAiBrakeDiff = buffer.get();
 
-        System.out.println(buffer.position());
+        System.out.println("End " + buffer.position());
 
         System.out.println(Arrays.toString(engineRPM));
         System.out.println(Arrays.toString(normSusTravel));

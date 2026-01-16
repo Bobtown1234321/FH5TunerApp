@@ -115,9 +115,7 @@ Dash - Contains Sled data as well as extra points
     228 S32 NumCylinders = 8, 0, 0, 0,
     232 S32 carType = 48, 0, 0, 0,
 
-    236 U32 objectHit = 0, 0, 0, 0,
-
-    240
+    236 U64 objectHit = 0, 0, 0, 0, 0, 0, 0, 0,
 
     244 F32 PositionX = 32, 108, -82, 69,
     248 F32 PositionY = -111, -101, -49, 66,
