@@ -116,7 +116,8 @@ Dash - Contains Sled data as well as extra points
     232 S32 carType = 48, 0, 0, 0,
 
     236 U32 objectHit = 0, 0, 0, 0,
-    240 S32 carOrdinal = 0, 0, 0, 0,
+
+    240
 
     244 F32 PositionX = 32, 108, -82, 69,
     248 F32 PositionY = -111, -101, -49, 66,

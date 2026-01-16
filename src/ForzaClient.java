@@ -6,19 +6,22 @@ import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.util.Arrays;
 
-public class ForzaClient implements Runnable{
+public class ForzaClient implements Runnable {
     //Port on which to receive telemetry data set in Forza Settings
     private final int port;
     private rawDataLogger dataLogger;
-    public ForzaClient(int port){
+
+    public ForzaClient(int port) {
         this.port = port;
     }
-    public rawDataLogger getDataLogger(){
+
+    public rawDataLogger getDataLogger() {
         return dataLogger;
     }
+
     @Override
     public void run() {
-        try(MulticastSocket clientSocket = new MulticastSocket(port)){
+        try (MulticastSocket clientSocket = new MulticastSocket(port)) {
             int maxUDPSize = 323;
             int timeout = 10000;
             byte[] buffer = new byte[maxUDPSize];
@@ -28,15 +31,15 @@ public class ForzaClient implements Runnable{
 
             clientSocket.setSoTimeout(timeout);
             DatagramPacket datagramPacket = new DatagramPacket(buffer, 0, buffer.length);
-            while (true){
+            while (true) {
                 clientSocket.receive(datagramPacket);
 //                ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
 //                byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-                if (buffer[0] == 1){
+                if (buffer[0] == 1) {
                     dataLogger.writeToFile(Arrays.toString(buffer).getBytes());
                 }
             }
-        } catch (SocketException e){
+        } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Timeout!");
