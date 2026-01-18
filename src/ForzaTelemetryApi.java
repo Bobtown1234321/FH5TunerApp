@@ -1,6 +1,5 @@
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Arrays;
 
 public class ForzaTelemetryApi {
 
@@ -100,16 +99,169 @@ public class ForzaTelemetryApi {
 
         normDriveLine = buffer.get();
         normAiBrakeDiff = buffer.get();
-
-        System.out.println("End " + buffer.position());
-
-        System.out.println(Arrays.toString(engineRPM));
-        System.out.println(Arrays.toString(normSusTravel));
-        //The starting bit location
-        gear = buffer.get(319);
-        System.out.println(boost);
-        System.out.println(gear);
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ForzaTelemetryApi{");
+        sb.append("isRaceOn=").append(isRaceOn);
+        sb.append(", carOrdinal=").append(carOrdinal);
+        sb.append(", carClass=").append(carClass);
+        sb.append(", carPerformanceIndex=").append(carPerformanceIndex);
+        sb.append(", driveType=").append(driveType);
+        sb.append(", numCyclinders=").append(numCyclinders);
+        sb.append(", carType=").append(carType);
+        sb.append(", timeMs=").append(timeMs);
+        sb.append(", objectHit=").append(objectHit);
+        sb.append(", engineRPM=");
+        if (engineRPM == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < engineRPM.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(engineRPM[i]);
+            sb.append(']');
+        }
+        sb.append(", carAccler=");
+        if (carAccler == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < carAccler.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(carAccler[i]);
+            sb.append(']');
+        }
+        sb.append(", velocity=");
+        if (velocity == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < velocity.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(velocity[i]);
+            sb.append(']');
+        }
+        sb.append(", angularVelocity=");
+        if (angularVelocity == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < angularVelocity.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(angularVelocity[i]);
+            sb.append(']');
+        }
+        sb.append(", angularPosition=");
+        if (angularPosition == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < angularPosition.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(angularPosition[i]);
+            sb.append(']');
+        }
+        sb.append(", normSusTravel=");
+        if (normSusTravel == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < normSusTravel.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(normSusTravel[i]);
+            sb.append(']');
+        }
+        sb.append(", normSlipRatio=");
+        if (normSlipRatio == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < normSlipRatio.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(normSlipRatio[i]);
+            sb.append(']');
+        }
+        sb.append(", wheelRotSpd=");
+        if (wheelRotSpd == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < wheelRotSpd.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(wheelRotSpd[i]);
+            sb.append(']');
+        }
+        sb.append(", onRumbleStrip=");
+        if (onRumbleStrip == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < onRumbleStrip.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(onRumbleStrip[i]);
+            sb.append(']');
+        }
+        sb.append(", puddleDepth=");
+        if (puddleDepth == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < puddleDepth.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(puddleDepth[i]);
+            sb.append(']');
+        }
+        sb.append(", surfaceRumble=");
+        if (surfaceRumble == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < surfaceRumble.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(surfaceRumble[i]);
+            sb.append(']');
+        }
+        sb.append(", normSlipAngle=");
+        if (normSlipAngle == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < normSlipAngle.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(normSlipAngle[i]);
+            sb.append(']');
+        }
+        sb.append(", normCombinedSlip=");
+        if (normCombinedSlip == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < normCombinedSlip.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(normCombinedSlip[i]);
+            sb.append(']');
+        }
+        sb.append(", actSusTravel=");
+        if (actSusTravel == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < actSusTravel.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(actSusTravel[i]);
+            sb.append(']');
+        }
+        sb.append(", position=");
+        if (position == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < position.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(position[i]);
+            sb.append(']');
+        }
+        sb.append(", tireTemp=");
+        if (tireTemp == null) sb.append("null");
+        else {
+            sb.append('[');
+            for (int i = 0; i < tireTemp.length; ++i)
+                sb.append(i == 0 ? "" : ", ").append(tireTemp[i]);
+            sb.append(']');
+        }
+        sb.append(", speed=").append(speed);
+        sb.append(", power=").append(power);
+        sb.append(", torque=").append(torque);
+        sb.append(", boost=").append(boost);
+        sb.append(", fuel=").append(fuel);
+        sb.append(", distTraveled=").append(distTraveled);
+        sb.append(", bestLap=").append(bestLap);
+        sb.append(", lastLap=").append(lastLap);
+        sb.append(", currLap=").append(currLap);
+        sb.append(", currRaceTime=").append(currRaceTime);
+        sb.append(", lapNum=").append(lapNum);
+        sb.append(", racePos=").append(racePos);
+        sb.append(", throttle=").append(throttle);
+        sb.append(", brake=").append(brake);
+        sb.append(", clutch=").append(clutch);
+        sb.append(", handBrake=").append(handBrake);
+        sb.append(", gear=").append(gear);
+        sb.append(", steer=").append(steer);
+        sb.append(", normDriveLine=").append(normDriveLine);
+        sb.append(", normAiBrakeDiff=").append(normAiBrakeDiff);
+        sb.append('}');
+        return sb.toString();
+    }
 }
